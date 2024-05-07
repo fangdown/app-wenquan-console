@@ -2,7 +2,11 @@ import axios from 'axios'
 import { message } from 'antd'
 import { getToken } from '../utils/user-token'
 
+const DEV_BASE_API = 'http://localhost:11011';
+const PRO_BASE_API = 'https://api.git123.cn:11011';
+const API = process.env.NODE_ENV === 'development' ? DEV_BASE_API : PRO_BASE_API;
 const instance = axios.create({
+  baseURL: API, // url = base url + request url
   timeout: 10 * 1000,
 })
 
