@@ -1,40 +1,47 @@
+const { name } = require("./package");
 module.exports = {
   webpack: {
     configure(webpackConfig) {
-      if (webpackConfig.mode === 'production') {
+      if (webpackConfig.mode === "production") {
         // 抽离公共代码，只在生产环境
         if (webpackConfig.optimization == null) {
-          webpackConfig.optimization = {}
+          webpackConfig.optimization = {};
         }
         webpackConfig.optimization.splitChunks = {
-          chunks: 'all',
+          chunks: "all",
           cacheGroups: {
             antd: {
-              name: 'antd-chunk',
+              name: "antd-chunk",
               test: /antd/,
               priority: 100,
             },
             reactDom: {
-              name: 'reactDom-chunk',
+              name: "reactDom-chunk",
               test: /react-dom/,
               priority: 99,
             },
             vendors: {
-              name: 'vendors-chunk',
+              name: "vendors-chunk",
               test: /node_modules/,
               priority: 98,
             },
           },
-        }
+        };
       }
-      return webpackConfig
+      webpackConfig.output.library = `${name}-[name]`;
+      webpackConfig.output.libraryTarget = "umd";
+      webpackConfig.output.chunkLoadingGlobal = `webpackJsonp_${name}`;
+      return webpackConfig;
     },
   },
 
   devServer: {
-    port: 8000, // B 端，前端
+    port: 12010, // B 端，前端
     proxy: {
-      '/api': 'http://localhost:3001', // Mock
+      "/api": "http://localhost:11011", // Mock
+    },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
     },
   },
-}
+};
