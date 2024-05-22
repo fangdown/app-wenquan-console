@@ -29,7 +29,7 @@ module.exports = {
         };
       }
       webpackConfig.output.library = `${name}-[name]`;
-      webpackConfig.output.libraryTarget = "umd";
+      webpackConfig.output.libraryTarget = "window";
       webpackConfig.output.chunkLoadingGlobal = `webpackJsonp_${name}`;
       return webpackConfig;
     },
