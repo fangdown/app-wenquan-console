@@ -31,7 +31,7 @@ module.exports = {
       webpackConfig.output.library = `${name}-[name]`;
       webpackConfig.output.libraryTarget = "window";
       webpackConfig.output.chunkLoadingGlobal = `webpackJsonp_${name}`;
-      webpackConfig.output.publicPath = "/subapp/";
+      webpackConfig.output.publicPath = "/subapp/wenquan/";
       return webpackConfig;
     },
   },
